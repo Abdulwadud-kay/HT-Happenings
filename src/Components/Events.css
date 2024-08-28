@@ -1,0 +1,21 @@
+.event-draft-box {
+    border: 2px solid #8B0000; /* HT maroon color */
+    border-radius: 8px;
+    padding: 16px;
+    margin: 16px;
+    background-color: #FFFACD; /* HT yellowish color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .event-name {
+    font-size: 18px;
+    font-weight: bold;
+    color: #8B0000; /* HT maroon color */
+  }
+  
+  .event-location,
+  .event-time {
+    font-size: 14px;
+    color: #333;
+  }
+  

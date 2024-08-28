@@ -1,0 +1,42 @@
+.event-detail-page {
+    border: 2px solid #8B0000; /* HT maroon color */
+    border-radius: 8px;
+    padding: 24px;
+    background-color: #FFFACD; /* HT yellowish color */
+    margin: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .event-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #8B0000; /* HT maroon color */
+  }
+  
+  .event-time,
+  .event-location {
+    font-size: 18px;
+    color: #333;
+  }
+  
+  .event-description {
+    font-size: 16px;
+    margin-top: 16px;
+    color: #333;
+  }
+  
+  .sign-up-button {
+    background-color: #8B0000; /* HT maroon color */
+    color: #FFF;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 20px;
+  }
+  
+  .sign-up-button:hover {
+    background-color: #A52A2A; /* Slightly lighter maroon */
+  }
+  
