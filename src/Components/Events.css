@@ -1,21 +1,75 @@
+/* Events.css */
 .event-draft-box {
-    border: 2px solid #8B0000; /* HT maroon color */
+    width: 100%;
+    max-width: 500px; /* Adjust to fit your design */
+    padding: 10px 20px; /* Adjust padding for top/bottom */
+    margin: 20px auto;
+    border: 2px solid #800000; /* Maroon border */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow around the box */
     border-radius: 8px;
-    padding: 16px;
-    margin: 16px;
-    background-color: #FFFACD; /* HT yellowish color */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
   }
   
   .event-name {
-    font-size: 18px;
-    font-weight: bold;
-    color: #8B0000; /* HT maroon color */
+    font-size: 1.5em;
+    color: #800000; /* Maroon color for the title */
+    margin-bottom: 10px;
+    text-align: left;
+  }
+  
+  
+  .event-date{
+    background-color: #e8e4e4; /* Slightly off-white background */
+    padding: 9px 100px;
+    margin-bottom: 5px;
+    border-radius: 4px;
   }
   
   .event-location,
   .event-time {
-    font-size: 14px;
-    color: #333;
+    background-color: #f9f9f9; /* Slightly off-white background */
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
   }
   
+  .event-time-container {
+    display: flex;
+    gap: 10px; /* Space between time and location boxes */
+    margin-top: 16px;
+}
+
+.sign-up-button,
+  .learn-more-link {
+    display: block;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+.sign-up-button {
+    background-color: #007bff; /* Blue background */
+    color: #fff;
+    border: none;
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .sign-up-button:hover {
+    background-color: #0056b3; /* Darker blue on hover */
+  }
+  
+  .learn-more-link {
+    color: #007bff; /* Blue text */
+    text-decoration: none;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .learn-more-link:hover {
+    text-decoration: underline;
+  }

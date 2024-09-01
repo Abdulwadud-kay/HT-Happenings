@@ -1,0 +1,44 @@
+/* src/components/ProfileMiniView.css */
+
+.profile-mini-view {
+    display: flex;
+    flex-direction: column; /* Align elements vertically */
+    align-items: center; /* Center-align elements */
+    padding: 20px;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    top: 50px; /* Adjusted position for proper alignment */
+    right: 10px; /* Adjusted position for proper alignment */
+    width: 200px; /* Fixed width for consistency */
+    text-align: center; /* Center text inside */
+}
+
+.profile-pic, .profile-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-bottom: 10px; /* Space below the image/icon */
+    color: #800000;
+}
+
+.profile-name {
+    color: #800000; /* HTU maroon */
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px; /* Space below the name */
+}
+
+.logout-button {
+    background-color: #d9534f;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout-button:hover {
+    background-color: darkred;
+}

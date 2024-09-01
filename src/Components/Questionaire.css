@@ -1,46 +1,38 @@
 .questionnaire-container {
     padding: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   }
   
   .topics-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 10px;
   }
   
   .topic-card {
-    border: 1px solid #ddd;
-    border-radius: 8px;
     padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     text-align: center;
-    background-color: #fff;
     cursor: pointer;
-  }
-  
-  .topic-card.utmost-selected {
-    background-color: #ffce3b; /* HT's light yellowish color */
-  }
-  
-  .topic-card.medial-selected {
-    background-color: #fff707; /* HT's light yellowish color */
-  }
-  
-  .topic-card.minimal-selected {
-    background-color: #f9ee55db; /* HT's light yellowish color */
   }
   
   .save-button {
-    margin-top: 20px;
     padding: 10px 20px;
+    background-color: #8B0000;
+    color: #FFF;
     border: none;
-    border-radius: 8px;
-    background-color: #b71c1c; /* Maroon color */
-    color: white;
+    border-radius: 4px;
     cursor: pointer;
+    margin-top: 20px;
   }
   
   .save-button:hover {
-    padding: 11px 22px; /* Darker maroon color */
+    background-color: #A52A2A;
   }
   
   .error-message {
@@ -49,5 +41,10 @@
   
   .success-message {
     color: green;
+  }
+  
+  .selected {
+    background-color: #FFEB3B; /* Deepest color for selected topic */
+    color: #333;
   }
   

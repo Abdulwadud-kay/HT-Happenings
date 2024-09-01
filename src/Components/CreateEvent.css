@@ -1,0 +1,76 @@
+.create-event-container {
+    width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #8B0000; /* HT maroon color */
+    border-radius: 8px;
+    background-color: white; /* HT yellowish color */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  h2 {
+    text-align: center;
+    color: #8B0000; /* HT maroon color */
+  }
+  
+  .success-message {
+    text-align: center;
+    color: green; /* Set the text color to green */
+    font-weight: bold; /* Make the text bold for emphasis */
+    margin-top: 10px; /* Add some space above the message */
+  }
+
+  .error-message {
+    text-align: center;
+    font-size: 16px;
+    color: green; /* Success message color */
+    color: red; /* Error message color */
+  }
+  
+  .create-event-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .create-event-button {
+    background-color: #8B0000; /* HT maroon color */
+    color: #FFF;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .create-event-button:hover {
+    background-color: #A52A2A; /* Slightly lighter maroon */
+  }
+  
+  .back-link {
+    display: inline-block;
+    margin-bottom: 20px;
+    font-size: 1em;
+    color: #800000; /* Maroon HTU color */
+    text-decoration: none;
+  }
+  
+  .back-link:hover {
+    text-decoration: underline;
+  }

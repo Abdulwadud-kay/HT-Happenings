@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import "./AuthStyles.css"; // Import a shared CSS file for styles
-import { createUserWithEmailAndPassword } from "firebase/auth"; // Correct import
-import { auth } from "../firebase"; // Adjust the path as per your project structure
-import { useNavigate } from "react-router-dom"; // Importing useNavigate for navigation
+import "./AuthStyles.css"; 
+import { createUserWithEmailAndPassword } from "firebase/auth"; 
+import { auth, firestore } from "../firebase"; 
+import { useNavigate } from "react-router-dom";
+import { collection, doc, setDoc } from "firebase/firestore";
 
 const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +16,7 @@ const SignUp = () => {
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
-  const navigate = useNavigate(); // Using useNavigate hook for navigation
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,7 +24,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Basic validations
     if (!formData.email.endsWith("@htu.edu")) {
       setError("Email must end with @htu.edu");
@@ -43,17 +44,25 @@ const SignUp = () => {
       return;
     }
 
-    // Create user with email and password
     try {
-      await createUserWithEmailAndPassword(auth, formData.email, formData.password);
-      
-      // If sign-up is successful
-      setSuccess("Sign Up Successful, Please login");
+      // Correct usage of createUserWithEmailAndPassword in Firebase v9
+      const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
+      const userId = userCredential.user.uid;
+
+      // Create a user document in Firestore
+      await setDoc(doc(collection(firestore, "users"), userId), {
+        email: formData.email,
+        phoneNumber: formData.phoneNumber,
+        fullName: formData.fullName,
+      });
+
+      setSuccess("SignUp successful!");
+      navigate('/Login');
       setError("");
-      navigate("/"); // Navigates the user to the login page
+      
+      // Optionally, navigate to another page, e.g., navigate('/home');
     } catch (error) {
-      // Display error message if sign-up fails
-      setError(error.message);
+      setError("Error creating user: " + error.message);
       setSuccess("");
     }
   };

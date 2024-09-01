@@ -1,23 +1,39 @@
-// src/components/Navbar.js
-import React from "react";
-import { Link } from "react-router-dom";
-import "./NavBar.css"; // CSS file for styling the navbar
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase'; // Import your Firebase setup
+import ProfileMiniView from './ProfileMiniView'; // Import the ProfileMiniView component
+import './NavBar.css'; // CSS file for styling the navbar
+import { FaUserCircle } from 'react-icons/fa'; // Importing the profile icon from react-icons
 
 const NavBar = () => {
+  const [showProfile, setShowProfile] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
   return (
-    
     <nav className="navbar">
       <h1 className="navbar-title">HTU Campus Events</h1>
       <ul className="navbar-links">
         <li>
-          <Link to="/signup" className="navbar-link">
-            Sign Up
+          <Link to="/eventcreate" className="navbar-link">
+            Create Event
           </Link>
         </li>
         <li>
-          <Link to="/login" className="navbar-link">
-            Login
-          </Link>
+          <div
+            className="profile-icon-main"
+            onClick={() => setShowProfile((prev) => !prev)} // Toggle profile view
+          >
+            <FaUserCircle size={30} className="navbar-profile-icon" /> {/* Profile icon */}
+          </div>
+          {showProfile && <ProfileMiniView onLogout={handleLogout} />}
         </li>
       </ul>
     </nav>

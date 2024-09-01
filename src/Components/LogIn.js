@@ -1,9 +1,9 @@
-// src/Components/LogIn.js
 import React, { useState } from "react";
 import "./AuthStyles.css";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase"; // Adjust the path if necessary
-import { useNavigate } from "react-router-dom"; // Importing useNavigate for navigation
+import { auth, firestore } from "../firebase"; // Import firestore
+import { useNavigate } from "react-router-dom";
+import { doc, getDoc } from "firebase/firestore"; // Import Firestore methods
 
 const LogIn = () => {
   const [formData, setFormData] = useState({
@@ -21,19 +21,33 @@ const LogIn = () => {
   const handleSignIn = async (e) => {
     e.preventDefault();
 
-    // Check if either the email or password field is empty
     if (formData.email === "" || formData.password === "") {
       setError("Please input both email and password");
       return;
     }
 
-    // Sign in then navigate to the homepage
     try {
-      await signInWithEmailAndPassword(auth, formData.email, formData.password);
-      setError(""); // Clear any previous error
-      navigate("/Questionaire"); // Navigate to the home page
+      const userCredential = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+      setError("");
+
+      // Fetch the user document from Firestore
+      const userId = userCredential.user.uid;
+      const userDocRef = doc(firestore, "users", userId);
+      const userDocSnap = await getDoc(userDocRef);
+
+      // Check if the user document exists and if the questionnaire is completed
+      if (userDocSnap.exists()) {
+        const userData = userDocSnap.data();
+        if (userData.questionnaireCompleted) {
+          navigate("/home"); // Redirect to home if questionnaire is completed
+        } else {
+          navigate("/questionaire"); // Redirect to questionnaire if not completed
+        }
+      } else {
+        navigate("/questionaire"); // Default to questionnaire if no user data
+      }
     } catch (error) {
-      setError(error.message); // Display error message
+      setError(error.message);
     }
   };
 
@@ -41,7 +55,7 @@ const LogIn = () => {
     <div className="auth-container">
       <h2 className="auth-title">Login</h2>
       <form onSubmit={handleSignIn} className="auth-form">
-        {error && <p className="auth-error">{error}</p>} {/* Display error messages */}
+        {error && <p className="auth-error">{error}</p>}
         <input
           type="email"
           name="email"

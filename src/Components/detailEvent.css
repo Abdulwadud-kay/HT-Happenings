@@ -2,30 +2,58 @@
     border: 2px solid #8B0000; /* HT maroon color */
     border-radius: 8px;
     padding: 24px;
-    background-color: #FFFACD; /* HT yellowish color */
+    background-color: white; /* HT yellowish color */
     margin: 16px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .event-name {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.event-name {
     font-size: 24px;
     font-weight: bold;
     color: #8B0000; /* HT maroon color */
-  }
-  
-  .event-time,
-  .event-location {
+}
+
+/* Flex container for time and date */
+.event-info-container {
+    display: flex;
+    gap: 16px; /* Space between date and time boxes */
+    margin-top: 16px;
+}
+
+/* Ensure date and time boxes have the same width and are contained */
+.event-date,
+.event-time {
+    flex: 1; /* Allows both to grow equally */
     font-size: 18px;
     color: #333;
-  }
-  
-  .event-description {
+    background-color: rgb(232, 229, 229);
+    padding: 8px;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding is included in the total width */
+    text-align: center; /* Center text horizontally */
+    max-width: 200px; /* Maximum width to prevent spanning out */
+}
+
+/* Location box styling */
+.event-location {
+    font-size: 18px;
+    color: #333;
+    background-color: rgb(232, 229, 229);
+    padding: 8px 10px;
+    border-radius: 4px;
+    box-sizing: border-box; /* Ensures padding is included in the total width */
+    text-align: center; /* Center text horizontally */
+    max-width: 200px; /* Maximum width to prevent spanning out */
+    margin-top: 16px; /* Space above the location box */
+}
+
+.event-description {
     font-size: 16px;
     margin-top: 16px;
     color: #333;
-  }
-  
-  .sign-up-button {
+}
+
+.sign-up-button {
     background-color: #8B0000; /* HT maroon color */
     color: #FFF;
     border: none;
@@ -34,9 +62,8 @@
     font-size: 16px;
     cursor: pointer;
     margin-top: 20px;
-  }
-  
-  .sign-up-button:hover {
+}
+
+.sign-up-button:hover {
     background-color: #A52A2A; /* Slightly lighter maroon */
-  }
-  
+}
