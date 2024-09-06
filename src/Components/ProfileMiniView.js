@@ -1,23 +1,49 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, storage } from '../firebase'; // Import your Firebase setup and storage
+import { auth, storage, firestore } from '../firebase'; // Import your Firebase setup and storage
 import './ProfileMiniView.css'; // CSS file for styling the profile mini-view
 import { FaUserCircle } from 'react-icons/fa'; // Importing the profile icon from react-icons
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'; // Firebase storage functions
 import { updateProfile } from 'firebase/auth';
+import { doc, getDoc } from 'firebase/firestore';
 
 const ProfileMiniView = ({ onLogout }) => {
   const [user] = useAuthState(auth);
   const fileInputRef = useRef(null);
   const [profilePicUrl, setProfilePicUrl] = useState(user?.photoURL);
 
+
   // Define a variable for user.photoURL
   const userPhotoURL = user?.photoURL;
+  const [displayName, setDisplayName] = useState('User Name');
+
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      if (user) {
+        try {
+          const userDoc = doc(firestore, 'users', user.uid);
+          const userSnapshot = await getDoc(userDoc);
+
+          if (userSnapshot.exists()) {
+            const userData = userSnapshot.data();
+            setDisplayName(userData.email || 'User Name'); // Set the display name or default value
+          } else {
+            console.error('User not found!');
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      }
+    };
+
+    fetchUserData();
+  }, [user]);
 
   useEffect(() => {
     // Update profilePicUrl when user photoURL changes
     setProfilePicUrl(userPhotoURL);
-  }, [userPhotoURL]); // Use the stable variable in dependency array
+  }, [userPhotoURL]);
 
   const handleProfilePicClick = () => {
     fileInputRef.current.click(); // Trigger file input click when profile icon is clicked
@@ -70,7 +96,7 @@ const ProfileMiniView = ({ onLogout }) => {
         style={{ display: 'none' }}
         onChange={handleFileChange}
       />
-      <p className="profile-name">{user?.displayName || 'User Name'}</p>
+      <p className="profile-name">{displayName}</p> {/* Display user’s displayName */}
       <button onClick={onLogout} className="logout-button">Logout</button>
     </div>
   );

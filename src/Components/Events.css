@@ -1,25 +1,26 @@
-/* Events.css */
+ /* Events.css
 .event-draft-box {
     width: 100%;
-    max-width: 500px; /* Adjust to fit your design */
-    padding: 10px 20px; /* Adjust padding for top/bottom */
-    margin: 20px auto;
-    border: 2px solid #800000; /* Maroon border */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow around the box */
+    max-width: 500px; 
+    padding: 10px 20px;
+    margin: 20px 10px;
+    border: 2px solid #800000; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
     border-radius: 8px;
     background-color: #fff;
   }
   
   .event-name {
+
     font-size: 1.5em;
-    color: #800000; /* Maroon color for the title */
+    color: #800000; 
     margin-bottom: 10px;
     text-align: left;
   }
   
   
   .event-date{
-    background-color: #e8e4e4; /* Slightly off-white background */
+    background-color: #e8e4e4; 
     padding: 9px 100px;
     margin-bottom: 5px;
     border-radius: 4px;
@@ -27,7 +28,7 @@
   
   .event-location,
   .event-time {
-    background-color: #f9f9f9; /* Slightly off-white background */
+    background-color: #f9f9f9; 
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 4px;
@@ -35,7 +36,7 @@
   
   .event-time-container {
     display: flex;
-    gap: 10px; /* Space between time and location boxes */
+    gap: 10px; 
     margin-top: 16px;
 }
 
@@ -47,8 +48,8 @@
   }
 
 .sign-up-button {
-    background-color: #007bff; /* Blue background */
-    color: #fff;
+    color: maroon; 
+   
     border: none;
     padding: 8px;
     border-radius: 4px;
@@ -57,11 +58,11 @@
   }
   
   .sign-up-button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: rgb(182, 4, 4); 
   }
   
   .learn-more-link {
-    color: #007bff; /* Blue text */
+    color: rgb(150, 3, 3); 
     text-decoration: none;
     background: none;
     border: none;
@@ -72,4 +73,4 @@
   
   .learn-more-link:hover {
     text-decoration: underline;
-  }
+  }  */

@@ -8,6 +8,7 @@ import Questionnaire from './Components/Questionaire';
 import EventDraft from './Components/EventDraft';
 import EventDetail from './Components/EventDetail';
 import EventCreate from './Components/EventCreate';
+import MyEventsPage from './Components/myEvents';
 import { AuthProvider } from './Components/AuthContext';
 import ProtectedRoute from './Components/ProtectedRoute';
 
@@ -26,7 +27,7 @@ const AppLayout = () => {
 
   return (
     <div className="App">
-      {location.pathname === "/home" ? (
+      {location.pathname === "/home" || "/eventcreate" || "/myevents" ? (
         <NavBar /> // Show NavBar only on the home page
       ) : (
         <h1 className="page-title">{getPageTitle()}</h1> // Show the page name on other pages
@@ -52,7 +53,7 @@ const AppLayout = () => {
           }
         />
         <Route
-          path="/eventdetail/:id" // Updated route to include event ID
+          path="/eventdetail/:eventId" // Updated route to include event ID
           element={
             <ProtectedRoute>
               <EventDetail />
@@ -72,6 +73,14 @@ const AppLayout = () => {
           element={
             <ProtectedRoute>
               <EventCreate />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/myevents"
+          element={
+            <ProtectedRoute>
+              <MyEventsPage />
             </ProtectedRoute>
           }
         />

@@ -21,9 +21,20 @@ const NavBar = () => {
     <nav className="navbar">
       <h1 className="navbar-title">HTU Campus Events</h1>
       <ul className="navbar-links">
+        {/* <div className="allign" > */}
+        <li>
+          <Link to="/home" className="navbar-link">
+            Home
+          </Link>
+        </li>
         <li>
           <Link to="/eventcreate" className="navbar-link">
             Create Event
+          </Link>
+        </li>
+        <li>
+          <Link to="/myevents" className="navbar-link">
+            My Events
           </Link>
         </li>
         <li>
@@ -35,6 +46,7 @@ const NavBar = () => {
           </div>
           {showProfile && <ProfileMiniView onLogout={handleLogout} />}
         </li>
+        {/* </div> */}
       </ul>
     </nav>
   );

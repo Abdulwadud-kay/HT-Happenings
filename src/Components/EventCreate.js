@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { firestore, auth } from '../firebase'; // Import your Firebase setup
-import './CreateEvent.css'; // CSS file for styling the event creation form
-import { collection, doc, setDoc } from 'firebase/firestore'; // Correct Firestore imports
-import { useAuthState } from 'react-firebase-hooks/auth'; // Import for Firebase hooks
+import React, { useState, useEffect } from 'react';
+import { firestore, auth } from '../firebase';
+import './CreateEvent.css';
+import { collection, doc, setDoc } from 'firebase/firestore';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useNavigate } from 'react-router-dom';
 
 const topics = [
@@ -12,18 +12,32 @@ const topics = [
   "Social", "Environment", "Wildlife", "Social Issues", "Community"
 ];
 
-const EventCreate = () => {
-  const [eventName, setEventName] = useState('');
-  const [eventLocation, setEventLocation] = useState('');
-  const [eventDate, setEventDate] = useState('');
-  const [eventTime, setEventTime] = useState('');
-  const [eventDescription, setEventDescription] = useState('');
-  const [eventCategory, setEventCategory] = useState('');
-  const [allowSignup, setAllowSignup] = useState(false); // New state for sign-up type
+const EventCreate = ({ editingEvent, setEditingEvent }) => {
+  const [eventName, setEventName] = useState(editingEvent ? editingEvent.name : '');
+  const [eventLocation, setEventLocation] = useState(editingEvent ? editingEvent.location : '');
+  const [eventDate, setEventDate] = useState(editingEvent ? editingEvent.date : '');
+  const [eventTime, setEventTime] = useState(editingEvent ? editingEvent.time : '');
+  const [eventDescription, setEventDescription] = useState(editingEvent ? editingEvent.description : '');
+  const [eventCategory, setEventCategory] = useState(editingEvent ? editingEvent.category : '');
+  const [allowSignup, setAllowSignup] = useState(editingEvent ? editingEvent.allowSignup : false);
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (editingEvent) {
+      setEventName(editingEvent.name);
+      setEventLocation(editingEvent.location);
+      setEventDate(editingEvent.date);
+      setEventTime(editingEvent.time);
+      setEventDescription(editingEvent.description);
+      setEventCategory(editingEvent.category);
+      setAllowSignup(editingEvent.allowSignup);
+
+      console.log('Editing event ID:', editingEvent.id);
+    }
+  }, [editingEvent]);
 
   const handleCreateEvent = async (e) => {
     e.preventDefault();
@@ -38,56 +52,73 @@ const EventCreate = () => {
     // Validate date and time
     const selectedDateTime = new Date(`${eventDate}T${eventTime}`);
     const currentDateTime = new Date();
-    const minAllowedDateTime = new Date(currentDateTime.getTime() + 30 * 60 * 1000); // 30 minutes into the future
+    const minAllowedDateTime = new Date(currentDateTime.getTime() + 30 * 60 * 1000);
 
     if (selectedDateTime < minAllowedDateTime) {
       setErrorMessage('Event date and time must be at least 30 minutes in the future.');
-      setEventDate(minAllowedDateTime.toISOString().split('T')[0]); // Update to minimum allowed date
-      setEventTime(minAllowedDateTime.toTimeString().slice(0, 5)); // Update to minimum allowed time
       return;
     }
 
+    
     try {
-      if (!user) {
-        throw new Error('User not authenticated');
+        if (!user) {
+          throw new Error('User not authenticated');
+        }
+  
+        const eventsCollectionRef = collection(firestore, 'events');
+  
+        if (editingEvent) {
+          // Update existing event
+          const eventRef = doc(eventsCollectionRef, editingEvent.id);
+          await setDoc(eventRef, {
+            name: eventName,
+            location: eventLocation,
+            date: eventDate,
+            time: eventTime,
+            description: eventDescription,
+            category: eventCategory,
+            allowSignup: allowSignup,
+            userID: user.uid, // Include user ID to identify the event creator
+          }, { merge: true });
+  
+          setSuccessMessage('Event updated successfully!');
+          setEditingEvent(null); // Clear editing state after update
+        } else {
+          // Create new event
+          await setDoc(doc(eventsCollectionRef), {
+            name: eventName,
+            location: eventLocation,
+            date: eventDate,
+            time: eventTime,
+            description: eventDescription,
+            category: eventCategory,
+            allowSignup: allowSignup,
+            userID: user.uid, // Include user ID to identify the event creator
+          });
+  
+          setSuccessMessage('Event created successfully!');
+        }
+  
+        // Clear the form
+        setEventName('');
+        setEventLocation('');
+        setEventDate('');
+        setEventTime('');
+        setEventDescription('');
+        setEventCategory('');
+        setAllowSignup(false);
+      } catch (error) {
+        setErrorMessage('Failed to save event. Please try again.');
+        console.error('Error saving event:', error);
       }
-
-      // Create a reference to the user's events sub-collection
-      const userEventsCollectionRef = collection(firestore, 'users', user.uid, 'events');
-      
-      // Create a new document in the user's events sub-collection with an auto-generated ID
-      await setDoc(doc(userEventsCollectionRef), {
-        name: eventName,
-        location: eventLocation,
-        date: eventDate,
-        time: eventTime,
-        description: eventDescription,
-        category: eventCategory,
-        allowSignup: allowSignup, // Store the allowSignup value
-      });
-
-      setSuccessMessage('Event created successfully!');
-      // Clear the form
-      setEventName('');
-      setEventLocation('');
-      setEventDate('');
-      setEventTime('');
-      setEventDescription('');
-      setEventCategory('');
-      setAllowSignup(false); // Reset the allowSignup state
-    } catch (error) {
-      setErrorMessage('Failed to create event. Please try again.');
-      console.error('Error creating event:', error);
-    }
-  };
-
+    };
   return (
     <div className="create-event-container">
       <a href="#!" onClick={() => navigate('/home')} className="back-link">
         Back
       </a>
 
-      <h2>Create New Event</h2>
+      <h2>{editingEvent ? 'Edit Event' : 'Create New Event'}</h2>
       {successMessage && <p className="success-message">{successMessage}</p>}
       {errorMessage && <p className="error-message">{errorMessage}</p>}
       <form onSubmit={handleCreateEvent} className="create-event-form">
@@ -155,7 +186,7 @@ const EventCreate = () => {
           </label>
         </div>
         <button type="submit" className="create-event-button">
-          Create Event
+          {editingEvent ? 'Update Event' : 'Create Event'}
         </button>
       </form>
     </div>
