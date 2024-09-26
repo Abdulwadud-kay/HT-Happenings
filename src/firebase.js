@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
-import { getFirestore } from "firebase/firestore";
+import { getFirestore, serverTimestamp } from "firebase/firestore";
 import { getAuth, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { getStorage } from "firebase/storage";
 
@@ -31,6 +31,7 @@ const firestore = getFirestore(app);
 const auth = getAuth(app);
 const storage = getStorage(app);
 
+
 setPersistence(auth, browserLocalPersistence);
 
-export { firestore, auth, analytics, storage };
+export { firestore, auth, analytics, storage, serverTimestamp };

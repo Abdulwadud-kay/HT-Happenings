@@ -15,23 +15,14 @@ import ProtectedRoute from './Components/ProtectedRoute';
 const AppLayout = () => {
   const location = useLocation(); // Get current location
 
-  // Function to get the page title based on path
-  const getPageTitle = () => {
-    switch (location.pathname) {
-      case "/questionaire":
-        return "Questionnaire";
-      default:
-        return "";
-    }
+  // Function to determine if navbar should be shown
+  const shouldShowNavbar = () => {
+    return !['/login', '/signup', '/'].includes(location.pathname);
   };
 
   return (
     <div className="App">
-      {location.pathname === "/home" || "/eventcreate" || "/myevents" ? (
-        <NavBar /> // Show NavBar only on the home page
-      ) : (
-        <h1 className="page-title">{getPageTitle()}</h1> // Show the page name on other pages
-      )}
+      {shouldShowNavbar() && <NavBar />}
       <Routes>
         <Route path="/signup" element={<SignUp />} />
         <Route path="/login" element={<Login />} />

@@ -1,0 +1,45 @@
+.event-row {
+  margin-bottom: 20px;
+}
+
+.month-header {
+  font-size: 1.5em;
+  margin-bottom: 10px;
+}
+
+.event-carousel {
+  display: flex;
+  align-items: center;
+}
+
+.scroll-button {
+  background-color: #ccc;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.event-list {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 10px;
+}
+
+.event-list::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-button.left {
+  left: 0;
+}
+
+.scroll-button.right {
+  right: 0;
+}
+
+.event-draft-box {
+  flex: 0 0 auto;
+  width: 250px;
+  margin-right: 20px;
+}

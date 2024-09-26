@@ -7,7 +7,15 @@
   justify-content: space-between;
   align-items: center;
   color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   
+}
+body {
+  padding-top: 60px; /* Adjust this value to match your navbar height */
 }
 
 .navbar-title {

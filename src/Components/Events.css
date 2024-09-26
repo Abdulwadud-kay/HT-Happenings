@@ -1,76 +1,181 @@
- /* Events.css
 .event-draft-box {
     width: 100%;
-    max-width: 500px; 
-    padding: 10px 20px;
-    margin: 20px 10px;
-    border: 2px solid #800000; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    height: 410px;
+    padding: 20px;
+    border: 0px solid #800000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
     border-radius: 8px;
     background-color: #fff;
-  }
-  
-  .event-name {
-
-    font-size: 1.5em;
-    color: #800000; 
-    margin-bottom: 10px;
-    text-align: left;
-  }
-  
-  
-  .event-date{
-    background-color: #e8e4e4; 
-    padding: 9px 100px;
-    margin-bottom: 5px;
-    border-radius: 4px;
-  }
-  
-  .event-location,
-  .event-time {
-    background-color: #f9f9f9; 
-    padding: 10px;
-    margin-bottom: 5px;
-    border-radius: 4px;
-  }
-  
-  .event-time-container {
+    overflow: hidden;
     display: flex;
-    gap: 10px; 
-    margin-top: 16px;
+    flex-direction: column;
+}  
+
+.event-draft-box h3 {
+    margin: 0 0 10px;
+    color: maroon;
+    font-size: 18px;
+} 
+
+.event-draft-box p {
+    margin: 5px 0;
+    color: #555;
+} 
+
+.event-draft-box .event-time-container {
+    display: flex;
+    justify-content: space-between;
+    margin: 10px 0;
+    font-size: 14px;
 }
 
-.sign-up-button,
-  .learn-more-link {
-    display: block;
-    margin-top: 10px;
-    text-align: center;
-  }
-
-.sign-up-button {
-    color: maroon; 
-   
+.event-draft-box button {
+    background-color: maroon;
+    color: white;
     border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+} 
+
+.event-draft-box button:hover {
+    background-color: maroon;
+}
+
+.event-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+}
+
+.event-info {
+    flex-grow: 1;
+}
+
+.event-name {
+    font-size: 1.2em;
+    color: #800000;
+    margin-bottom: 5px;
+}
+
+.event-location,
+.event-datetime {
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 3px;
+}
+
+.event-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.action-button, .sign-up-button, .learn-more-link {
     padding: 8px;
+    font-size: 0.9em;
+    border: none;
     border-radius: 4px;
     cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.sign-up-button, .learn-more-link {
+    width: 100%;
     margin-top: 10px;
-  }
-  
-  .sign-up-button:hover {
-    background-color: rgb(182, 4, 4); 
-  }
-  
-  .learn-more-link {
-    color: rgb(150, 3, 3); 
-    text-decoration: none;
-    background: none;
+    font-size: 1em;
+}
+
+.sign-up-button {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.learn-more-link {
+    background-color: #2196F3;
+    color: white;
+}
+
+.custom-field {
+    padding: 5px;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0;
+}
+
+.signups-details {
+    margin-top: 10px;
+    border-top: 1px solid #ccc;
+    padding-top: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.signups-details ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.signups-details li {
+    margin-bottom: 3px;
+    font-size: 0.9em;
+}
+
+.event-date, .event-time {
+    font-size: 1em !important;
+    padding: 5px !important;
+    margin-right: 10px !important;
+    flex: 1;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.event-date {
+    margin-right: 60px !important;
+    background-color: rgb(247, 247, 247) !important;
+}
+
+.event-datetime {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.event-time {
+    text-align: right;
+}
+
+.custom-field-container {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.custom-field {
+    flex-grow: 1;
+    margin-right: 10px;
+}
+
+.copy-button {
+    background-color: #4CAF50;
+    color: white;
     border: none;
-    padding: 8px;
+    padding: 5px 10px;
     cursor: pointer;
-    margin-top: 10px;
-  }
-  
-  .learn-more-link:hover {
-    text-decoration: underline;
-  }  */
+}
+
+.events-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 40px;
+    padding: 20px;
+}

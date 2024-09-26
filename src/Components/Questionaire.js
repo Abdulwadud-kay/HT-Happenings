@@ -40,7 +40,7 @@ const Questionnaire = () => {
       }
       
       // If less than 9 topics are selected, add the new topic
-      if (prev.length < 9) {
+      if (prev.length < 3) {
         return [...prev, topic];
       }
       
@@ -76,7 +76,7 @@ const Questionnaire = () => {
   return (
     <div className="questionnaire-container">
       <h2>Select Your Topics</h2>
-      <p>Select up to 9 topics. Click on a topic to select or deselect it.</p>
+      <p>Select 3 topics that you are interested in. Click on a topic to select or deselect it.</p>
       {error && <p className="error-message">{error}</p>}
       {successMessage && <p className="success-message">{successMessage}</p>}
       <div className="topics-grid">

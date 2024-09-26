@@ -4,6 +4,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth, firestore } from "../firebase"; // Import firestore
 import { useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore"; // Import Firestore methods
+import ErrorMessage from './ErrorMessage';
 
 const LogIn = () => {
   const [formData, setFormData] = useState({
@@ -55,7 +56,7 @@ const LogIn = () => {
     <div className="auth-container">
       <h2 className="auth-title">Login</h2>
       <form onSubmit={handleSignIn} className="auth-form">
-        {error && <p className="auth-error">{error}</p>}
+        {error && <ErrorMessage message={error} />}
         <input
           type="email"
           name="email"
